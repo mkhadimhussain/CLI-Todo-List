@@ -18,13 +18,25 @@ let registrationAnswer = await inquirer.prompt([
     {
         name: "registrationName",
         message: chalk.blue.bold("\nEnter your Name:"),
-        type: "input"
+        type: "input",
+        validate: (input) => {
+            if (!input.trim()) {
+                return '\nName Cannot be Empty.';
+            }
+            return true;
+        },
     },
     // For Password
     {
         name: "registrationPass",
         message: chalk.blue.bold("\nEnter the Password:"),
-        type: "password"
+        type: "password",
+        validate: (input) => {
+            if (!input.trim()) {
+                return '\nPassword Cannot be Empty.';
+            }
+            return true;
+        },
     }
 ]);
 console.log(chalk.bgGreenBright.bold("\nRegisterd Successfully!"));
@@ -35,13 +47,25 @@ let login = await inquirer.prompt([
     {
         name: "loginName",
         message: chalk.cyan.bold("\nEnter Your Username:"),
-        type: "input"
+        type: "input",
+        validate: (input) => {
+            if (!input.trim()) {
+                return '\nUsername Cannot be Empty.';
+            }
+            return true;
+        },
     },
     // For Password Login
     {
         name: "loginPass",
         message: chalk.cyan.bold("\nEnter Your Password:"),
-        type: "password"
+        type: "password",
+        validate: (input) => {
+            if (!input.trim()) {
+                return '\nPassword Cannot be Empty.';
+            }
+            return true;
+        },
     }
 ]);
 // If username && password is correct
@@ -53,7 +77,13 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
             {
                 name: "todo",
                 message: chalk.yellowBright.bold("\nWhat you want to add in your todos?"),
-                type: "input"
+                type: "input",
+                validate: (input) => {
+                    if (!input.trim()) {
+                        return '\nTodo Cannot be Empty, Please Enter a Task.';
+                    }
+                    return true;
+                }
             },
             // asking for adding more
             {
@@ -70,45 +100,52 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
         console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
         //console.log(todos);
     } // While Loop ends here
-    // For Replacing the Todo
-    let replaceTodo = await inquirer.prompt([
+    // For Updating the Todo
+    let updateTodo = await inquirer.prompt([
         {
-            name: "replace",
-            message: chalk.cyan.bold("\nAre you want to Replace any Todo?"),
+            name: "update",
+            message: chalk.cyan.bold("\nAre you want to Update any Todo?"),
             type: "confirm",
             default: "false"
         }
     ]);
-    // If Replace is yes
-    if (replaceTodo.replace) {
-        let replaceTodoAns = await inquirer.prompt([
+    // If Update is yes
+    if (updateTodo.update) {
+        let updateTodoAns = await inquirer.prompt([
             {
-                name: "replaceAns",
-                message: chalk.cyan.bold("\nSelect which Todo you want to Replace:"),
+                name: "updateAns",
+                message: chalk.cyan.bold("\nSelect which Todo you want to Update:"),
                 type: "list",
-                choices: todos
+                choices: todos,
             }
         ]);
-        // For writing the Replacing
-        let writeReplaceAns = await inquirer.prompt([
+        // For writing the Updated todo
+        let writeUpdateAns = await inquirer.prompt([
             {
-                name: "writeReplace",
-                message: chalk.cyan.bold("\nWrite the new Todo for Replacing:"),
-                type: "input"
+                name: "writeUpdate",
+                message: chalk.cyan.bold("\nWrite the new Todo for Updating:"),
+                type: "input",
+                validate: (input) => {
+                    if (!input.trim()) {
+                        return '\nTodo Cannot be Empty, Please Enter a Task.';
+                    }
+                    return true;
+                },
             }
         ]);
-        const selectedIndex = todos.indexOf(replaceTodoAns.replaceAns);
+        // store the index of a selected Updating todo in a variable "selectedIndex"
+        const selectedIndex = todos.indexOf(updateTodoAns.updateAns);
         if (selectedIndex !== -1) { // Ensure the selected todo exists in the array
-            // Replace the todo at the selected index with the new todo
-            todos[selectedIndex] = writeReplaceAns.writeReplace;
+            // Upadte the todo at the selected index with the new todo
+            todos[selectedIndex] = writeUpdateAns.writeUpdate;
         }
-        console.log(chalk.bgGreenBright.bold("\nTodo were Replaced Successfully!"));
+        console.log(chalk.bgGreenBright.bold("\nTodo were Updated Successfully!"));
         // log the inserted Todo's list
         console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
-        // When Replace is No
+        // When Update is No
     }
     else {
-        console.log(chalk.bgGreenBright.bold("\nNo Todos were Replaced!"));
+        console.log(chalk.bgGreenBright.bold("\nNo Todos were Updated!"));
     }
     // For inserting the intodos list
     let insertTodos = await inquirer.prompt([
@@ -125,7 +162,13 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
             {
                 name: "write",
                 message: chalk.cyan.bold("\nWrite the new Todo which you want to Insert:"),
-                type: "input"
+                type: "input",
+                validate: (input) => {
+                    if (!input.trim()) {
+                        return '\nTodo Cannot be Empty, Please Enter a Task.';
+                    }
+                    return true;
+                },
             }
         ]);
         // Add new todo to the end of the array
