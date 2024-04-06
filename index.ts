@@ -114,7 +114,7 @@ while(condition) {
     todos.push(addTask.todo);
     // Updating the value of condition based on the user's input stored in addTask.addMore
     condition = addTask.addMore;
-    console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
+    console.log(chalk.bgYellow.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
     //console.log(todos);
 
 } // While Loop ends here
@@ -134,6 +134,7 @@ let updateTodo = await inquirer.prompt(
 );
 // If Update is yes
 if (updateTodo.update) {
+    console.log(chalk.bgMagenta.bold("\nUpdating Todo"));
     let updateTodoAns = await inquirer.prompt(
         [
             {
@@ -172,7 +173,7 @@ if (updateTodo.update) {
     console.log(chalk.bgGreenBright.bold("\nTodo were Updated Successfully!"));
     
     // log the inserted Todo's list
-    console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
+    console.log(chalk.bgYellow.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
 
 // When Update is No
 } else {
@@ -192,6 +193,7 @@ let insertTodos = await inquirer.prompt(
 );
 // If Insert is yes
 if (insertTodos.insert) {
+    console.log(chalk.bgMagenta.bold("\nInserting Todo"));
     let writeTodo = await inquirer.prompt(
         [
             {
@@ -214,7 +216,7 @@ if (insertTodos.insert) {
     console.log(chalk.bgGreenBright.bold("\nTodo were Inserted Successfully!"));
 
     // log the inserted Todo's list
-    console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
+    console.log(chalk.bgYellow.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
 
 
 // when Update is No
@@ -243,19 +245,13 @@ if (deleteTodos.delete) {
 
 
 // Logging the Final Todos List
-console.log(chalk.bgMagenta.underline.bold("\nYour Final Todos List is:", chalk.bgCyan(todos)));
+console.log(chalk.bgYellow.underline.bold("\nYour Final Todos List is:", chalk.bgCyan(todos)));
 
 
 // Incorrect username && password
 } else {
     console.log(chalk.bgRed.bold("\nIncorrect Username or Password!"));
 }
-
-
-
-
-
-
 
 
 

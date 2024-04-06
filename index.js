@@ -97,7 +97,7 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
         todos.push(addTask.todo);
         // Updating the value of condition based on the user's input stored in addTask.addMore
         condition = addTask.addMore;
-        console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
+        console.log(chalk.bgYellow.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
         //console.log(todos);
     } // While Loop ends here
     // For Updating the Todo
@@ -111,6 +111,7 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
     ]);
     // If Update is yes
     if (updateTodo.update) {
+        console.log(chalk.bgMagenta.bold("\nUpdating Todo"));
         let updateTodoAns = await inquirer.prompt([
             {
                 name: "updateAns",
@@ -141,7 +142,7 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
         }
         console.log(chalk.bgGreenBright.bold("\nTodo were Updated Successfully!"));
         // log the inserted Todo's list
-        console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
+        console.log(chalk.bgYellow.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
         // When Update is No
     }
     else {
@@ -158,6 +159,7 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
     ]);
     // If Insert is yes
     if (insertTodos.insert) {
+        console.log(chalk.bgMagenta.bold("\nInserting Todo"));
         let writeTodo = await inquirer.prompt([
             {
                 name: "write",
@@ -175,7 +177,7 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
         todos.push(writeTodo.write);
         console.log(chalk.bgGreenBright.bold("\nTodo were Inserted Successfully!"));
         // log the inserted Todo's list
-        console.log(chalk.bgMagenta.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
+        console.log(chalk.bgYellow.underline.bold("\nYour Current Todos List is:", chalk.bgCyan(todos)));
         // when Update is No
     }
     else {
@@ -200,7 +202,7 @@ if (login.loginName === registrationAnswer.registrationName && login.loginPass =
         console.log(chalk.bgGreenBright.bold("\nNo Todos were Deleted!"));
     }
     // Logging the Final Todos List
-    console.log(chalk.bgMagenta.underline.bold("\nYour Final Todos List is:", chalk.bgCyan(todos)));
+    console.log(chalk.bgYellow.underline.bold("\nYour Final Todos List is:", chalk.bgCyan(todos)));
     // Incorrect username && password
 }
 else {
